@@ -1,0 +1,2 @@
+class HistoricoVazioError(Exception):
+    pass
