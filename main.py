@@ -1,3 +1,5 @@
+from time import sleep
+
 from calculadora import Calculadora
 
 
@@ -14,33 +16,43 @@ def get_valor(allow_zero=True):
 
 def main():
     calc = Calculadora()
+    mensagem = "Ligando..."
 
     while True:
-        print(calc)
+        calc.exibe(mensagem)
         op = input("Operação: ").lower()
+
         if op == "q":
-            print("Desligando...")
+            mensagem = "Desligando..."
+            calc.exibe(mensagem)
+            sleep(0.5)
             break
 
         match op:
             case "+":
                 valor = get_valor()
                 calc.adicionar(valor)
+                mensagem = f"Adicionado {valor}"
             case "-":
                 valor = get_valor()
                 calc.subtrair(valor)
+                mensagem = f"Subtraido {valor}"
             case "*":
                 valor = get_valor()
                 calc.multiplicar(valor)
+                mensagem = f"Multiplicado por {valor}"
             case "/":
                 valor = get_valor(allow_zero=False)
                 calc.dividir(valor)
+                mensagem = f"Dividido por {valor}"
             case "r":
                 calc.reset()
+                mensagem = "Calculadora reiniciada"
             case "d":
                 calc.undo()
+                mensagem = "Operação revertida"
             case _:
-                print("Operação desconhecida")
+                mensagem = "Operação desconhecida"
 
 
 if __name__ == "__main__":

@@ -1,4 +1,10 @@
+import os
+
 from errors import HistoricoVazioError
+
+
+def limpa_tela():
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 class Calculadora:
@@ -31,7 +37,16 @@ class Calculadora:
         self.__registrador = 0
         self.__historico = []
 
-    def exibe(self) -> str:
+    def exibe(self, mensagem: str = "") -> None:
+        limpa_tela()
+        print(self)
+        if mensagem:
+            print(f"\nStatus: {mensagem}")
+
+    def get_registrador(self) -> float:
+        return self.__registrador
+
+    def __str__(self) -> str:
         tela = ""
         tela += "+---------------+\n"
         tela += f"| {self.__registrador:13.2f} |\n"
@@ -46,9 +61,3 @@ class Calculadora:
         tela += "+---------------+\n"
 
         return tela
-
-    def get_registrador(self) -> float:
-        return self.__registrador
-
-    def __str__(self) -> str:
-        return self.exibe()
